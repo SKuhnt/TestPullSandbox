@@ -81,7 +81,7 @@ jobs:
           command: |
             sfdx force:source:deploy -p force-app -u prod -l RunLocalTests -w 33 --loglevel info
 workflows:
-  Test-a-Feature:
+  Tests:
     jobs:
       - TestDeployUAT:
           name: Test Deployment to UAT
@@ -89,7 +89,17 @@ workflows:
             branches:
               only:
                 - /^(?i)Feature*/
-  Master-Build:
+                - /^(?i)Hotfix*/
+      - TestDeployProd:
+          name: Test Deployment to Prod
+          filters:
+            branches:
+              only:
+                - /^(?i)Deploy-Prod*/
+                - /^(?i)Prod-Deploy*/
+                - /^(?i)Release*/
+                - /^(?i)Hotfix*/
+  Deploys:
     jobs:
       - DeployToUAT:
           name: Deployment to UAT
@@ -99,32 +109,6 @@ workflows:
                 - /^(?i)master/
                 - /^(?i)Dev/
                 - /^(?i)Development/
-  Release-to-Prod:
-    jobs:
-      - TestDeployProd:
-          name: Test Deployment to Prod
-          filters:
-            branches:
-              only:
-                - /^(?i)Deploy-Prod*/
-                - /^(?i)Prod-Deploy*/
-                - /^(?i)Release*/
-  Hotfix:
-    jobs:
-      - TestDeployProd:
-          name: Test Deployment to Prod
-          filters:
-            branches:
-              only:
-                - /^(?i)Hotfix*/
-      - TestDeployUAT:
-          name: Test Deployment to UAT
-          filters:
-            branches:
-              only:
-                - /^(?i)Hotfix*/
-  Prod:
-    jobs:
       - DeployToProd:
           name: Deployment to Production
           filters:
