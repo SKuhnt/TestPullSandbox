@@ -67,10 +67,6 @@ jobs:
       - run:
           name: UAT Deployment
           command: |
-            mv deploy.xml src/package.xml 
-            sfdx force:project:create -n TempDeploy
-            cd TempDeploy
-            sfdx force:mdapi:convert -r ../src -d force-app
             sfdx force:source:deploy -p force-app -u uat -l RunLocalTests -w 33 --loglevel info
   TestDeployProd:
     executor: my-executor
