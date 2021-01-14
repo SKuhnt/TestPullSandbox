@@ -4,4 +4,5 @@ public with sharing class Basic {
 		// test d
         return 2;
     }
+    //wuhu
 }
