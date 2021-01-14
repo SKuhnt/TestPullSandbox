@@ -112,7 +112,7 @@ workflows:
           filters:
             branches:
               only:
-                - (?i)Feature*
+                - /^(?i)Feature*/
   Master-Build:
     jobs:
       - DeployToUAT:
@@ -121,8 +121,8 @@ workflows:
             branches:
               only:
                 - /^(?i)master/
-                - (?i)Dev
-                - (?i)Development
+                - /^(?i)Dev/
+                - /^(?i)Development/
   Release-to-Prod:
     jobs:
       - TestDeployProd:
@@ -130,9 +130,9 @@ workflows:
           filters:
             branches:
               only:
-                - (?i)Deploy-Prod*
-                - (?i)Prod-Deploy*
-                - (?i)Release*
+                - /^(?i)Deploy-Prod*/
+                - /^(?i)Prod-Deploy*/
+                - /^(?i)Release*/
   Hotfix:
     jobs:
       - TestDeployProd:
@@ -140,13 +140,13 @@ workflows:
           filters:
             branches:
               only:
-                - (?i)Hotfix*
+                - /^(?i)Hotfix*/
       - TestDeployUAT:
           name: Test Deployment to UAT
           filters:
             branches:
               only:
-                - (?i)Hotfix*
+                - /^(?i)Hotfix*/
   Prod:
     jobs:
       - DeployToProd:
@@ -154,4 +154,4 @@ workflows:
           filters:
             branches:
               only:
-                - (?i)Prod
+                - /^(?i)Prod/
