@@ -88,17 +88,17 @@ workflows:
           filters:
             branches:
               only:
-                - /^(?i)Feature*/
-                - /^(?i)Hotfix*/
+                - /^(?i)Feature/*
+                - /^(?i)Hotfix/*
       - TestDeployProd:
           name: Test Deployment to Prod
           filters:
             branches:
               only:
-                - /^(?i)Deploy-Prod*/
-                - /^(?i)Prod-Deploy*/
-                - /^(?i)Release*/
-                - /^(?i)Hotfix*/
+                - /^(?i)Deploy-Prod/*
+                - /^(?i)Prod-Deploy/*
+                - /^(?i)Release/*
+                - /^(?i)Hotfix/*
   Deploys:
     jobs:
       - DeployToUAT:
