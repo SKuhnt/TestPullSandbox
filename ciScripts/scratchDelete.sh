@@ -1,0 +1,1 @@
+sfdx force:org:delete -u circle_build_$CIRCLE_BUILD_NUM -p
