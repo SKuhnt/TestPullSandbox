@@ -19,10 +19,6 @@ jobs:
       - run:
           name: Test Shared Deployment
           command: |
-            mv deploy.xml src/package.xml 
-            sfdx force:project:create -n TempDeploy
-            cd TempDeploy
-            sfdx force:mdapi:convert -r ../src -d force-app
             sfdx force:source:deploy -p force-app -u shared -l RunLocalTests -w 33 --loglevel info --checkonly
   DeployToShared:
     executor: my-executor
@@ -35,10 +31,6 @@ jobs:
       - run:
           name: Shared Deployment
           command: |
-            mv deploy.xml src/package.xml 
-            sfdx force:project:create -n TempDeploy
-            cd TempDeploy
-            sfdx force:mdapi:convert -r ../src -d force-app
             sfdx force:source:deploy -p force-app -u shared -l RunLocalTests -w 33 --loglevel info
   TestDeployUAT:
     executor: my-executor
@@ -51,10 +43,6 @@ jobs:
       - run:
           name: Test UAT Deployment
           command: |
-            mv deploy.xml src/package.xml 
-            sfdx force:project:create -n TempDeploy
-            cd TempDeploy
-            sfdx force:mdapi:convert -r ../src -d force-app
             sfdx force:source:deploy -p force-app -u uat -l RunLocalTests -w 33 --loglevel info --checkonly
   DeployToUAT:
     executor: my-executor
@@ -79,10 +67,6 @@ jobs:
       - run:
           name: Test Production Deployment
           command: |
-            mv deploy.xml src/package.xml 
-            sfdx force:project:create -n TempDeploy
-            cd TempDeploy
-            sfdx force:mdapi:convert -r ../src -d force-app
             sfdx force:source:deploy -p force-app -u prod -l RunLocalTests -w 33 --loglevel info --checkonly
   DeployToProd:
     executor: my-executor
@@ -95,10 +79,6 @@ jobs:
       - run:
           name: Production Deployment
           command: |
-            mv deploy.xml src/package.xml 
-            sfdx force:project:create -n TempDeploy
-            cd TempDeploy
-            sfdx force:mdapi:convert -r ../src -d force-app
             sfdx force:source:deploy -p force-app -u prod -l RunLocalTests -w 33 --loglevel info
 workflows:
   Test-a-Feature:
