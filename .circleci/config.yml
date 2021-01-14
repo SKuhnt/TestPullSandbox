@@ -120,7 +120,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^(?i)master
+                - /^(?i)master/
                 - (?i)Dev
                 - (?i)Development
   Release-to-Prod:
