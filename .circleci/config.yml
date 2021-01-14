@@ -1,0 +1,157 @@
+version: 2.1
+executors:
+  my-executor:
+    docker:
+      - image: cimg/node:14.5
+    working_directory: ~/ci_app
+
+orbs:
+  sfdx: circleci/salesforce-sfdx@2.1
+jobs: 
+  TestDeployShared:
+    executor: my-executor
+    steps:
+      - sfdx/install
+      - checkout
+      - run:
+          name: Auth Shared
+          command: . ~/ci_app/ciScripts/authShared.sh
+      - run:
+          name: Test Shared Deployment
+          command: |
+            mv deploy.xml src/package.xml 
+            sfdx force:project:create -n TempDeploy
+            cd TempDeploy
+            sfdx force:mdapi:convert -r ../src -d force-app
+            sfdx force:source:deploy -p force-app -u shared -l RunLocalTests -w 33 --loglevel info --checkonly
+  DeployToShared:
+    executor: my-executor
+    steps:
+      - sfdx/install
+      - checkout
+      - run:
+          name: Auth Shared
+          command: . ~/ci_app/ciScripts/authShared.sh
+      - run:
+          name: Shared Deployment
+          command: |
+            mv deploy.xml src/package.xml 
+            sfdx force:project:create -n TempDeploy
+            cd TempDeploy
+            sfdx force:mdapi:convert -r ../src -d force-app
+            sfdx force:source:deploy -p force-app -u shared -l RunLocalTests -w 33 --loglevel info
+  TestDeployUAT:
+    executor: my-executor
+    steps:
+      - sfdx/install
+      - checkout
+      - run:
+          name: Auth UAT
+          command: . ~/ci_app/ciScripts/authUAT.sh
+      - run:
+          name: Test UAT Deployment
+          command: |
+            mv deploy.xml src/package.xml 
+            sfdx force:project:create -n TempDeploy
+            cd TempDeploy
+            sfdx force:mdapi:convert -r ../src -d force-app
+            sfdx force:source:deploy -p force-app -u uat -l RunLocalTests -w 33 --loglevel info --checkonly
+  DeployToUAT:
+    executor: my-executor
+    steps:
+      - sfdx/install
+      - checkout
+      - run:
+          name: Auth UAT
+          command: . ~/ci_app/ciScripts/authUAT.sh
+      - run:
+          name: UAT Deployment
+          command: |
+            mv deploy.xml src/package.xml 
+            sfdx force:project:create -n TempDeploy
+            cd TempDeploy
+            sfdx force:mdapi:convert -r ../src -d force-app
+            sfdx force:source:deploy -p force-app -u uat -l RunLocalTests -w 33 --loglevel info
+  TestDeployProd:
+    executor: my-executor
+    steps:
+      - sfdx/install
+      - checkout
+      - run:
+          name: Auth Prod
+          command: . ~/ci_app/ciScripts/authProd.sh
+      - run:
+          name: Test Production Deployment
+          command: |
+            mv deploy.xml src/package.xml 
+            sfdx force:project:create -n TempDeploy
+            cd TempDeploy
+            sfdx force:mdapi:convert -r ../src -d force-app
+            sfdx force:source:deploy -p force-app -u prod -l RunLocalTests -w 33 --loglevel info --checkonly
+  DeployToProd:
+    executor: my-executor
+    steps:
+      - sfdx/install
+      - checkout
+      - run:
+          name: Auth Prod
+          command: . ~/ci_app/ciScripts/authProd.sh
+      - run:
+          name: Production Deployment
+          command: |
+            mv deploy.xml src/package.xml 
+            sfdx force:project:create -n TempDeploy
+            cd TempDeploy
+            sfdx force:mdapi:convert -r ../src -d force-app
+            sfdx force:source:deploy -p force-app -u prod -l RunLocalTests -w 33 --loglevel info
+workflows:
+  Test-a-Feature:
+    jobs:
+      - TestDeployUAT:
+          name: Test Deployment to UAT
+          filters:
+            branches:
+              only:
+                - (?i)Feature*
+  Master-Build:
+    jobs:
+      - DeployToUAT:
+          name: Deployment to UAT
+          filters:
+            branches:
+              only:
+                - (?i)master
+                - (?i)Dev
+                - (?i)Development
+  Release-to-Prod:
+    jobs:
+      - TestDeployProd:
+          name: Test Deployment to Prod
+          filters:
+            branches:
+              only:
+                - (?i)Deploy-Prod*
+                - (?i)Prod-Deploy*
+                - (?i)Release*
+  Hotfix:
+    jobs:
+      - TestDeployProd:
+          name: Test Deployment to Prod
+          filters:
+            branches:
+              only:
+                - (?i)Hotfix*
+      - TestDeployUAT:
+          name: Test Deployment to UAT
+          filters:
+            branches:
+              only:
+                - (?i)Hotfix*
+  Prod:
+    jobs:
+      - DeployToProd:
+          name: Deployment to Production
+          filters:
+            branches:
+              only:
+                - (?i)Prod
