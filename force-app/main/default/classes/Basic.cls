@@ -1,7 +1,7 @@
 public with sharing class Basic {
 
     public static Integer doIt(){
-		// test d
-        return 2;
+		// test
+        return 1;
     }
 }
