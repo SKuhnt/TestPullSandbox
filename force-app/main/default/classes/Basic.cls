@@ -4,7 +4,8 @@ public with sharing class Basic {
         
         //mein Hund liebt commits
         //wie?
-        return 1;
+        
+        return 2;
         //was?
     }
 }
