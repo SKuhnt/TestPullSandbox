@@ -1,11 +1,6 @@
 public with sharing class Basic {
 
-    public static Integer doIt(){
-        
-        //mein Hund liebt commits
-        //wie?
-        
+    public static Integer doIt(){        
         return 2;
-        //was?
     }
 }
