@@ -1,8 +1,8 @@
 public with sharing class Basic {
 
-    public static Integer doIt(){        
+    public static Integer doIt(){
         //B
-        Integer value = 1 + 1;
+        Integer value = 1;
         return value;
     }
 }
