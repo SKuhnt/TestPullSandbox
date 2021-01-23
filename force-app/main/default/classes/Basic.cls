@@ -1,7 +1,9 @@
 public with sharing class Basic {
 
     public static Integer doIt(){
-        //B
+        for(Integer i = 0; i < 2; i++){
+            List<Account> accs = [SELECT Id FROM Account];
+        }
         Integer value = 1;
         return value;
     }

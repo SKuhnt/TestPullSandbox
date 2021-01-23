@@ -7,7 +7,33 @@ executors:
 
 orbs:
   sfdx: circleci/salesforce-sfdx@2.1
-jobs: 
+jobs:
+  static-analysis:
+    docker:
+      - image: circleci/openjdk:latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - pmd-v6.0.1
+      - run:
+          name: Install PMD
+          command: |
+              if [ ! -d pmd-bin-6.0.1 ]; then
+                  curl -L "https://github.com/pmd/pmd/releases/download/pmd_releases/6.0.1/pmd-bin-6.0.1.zip" -o pmd-bin-6.0.1.zip
+                  unzip pmd-bin-6.0.1.zip
+                  rm pmd-bin-6.0.1.zip
+              fi
+      - save_cache:
+          key: pmd-v6.0.1
+          paths:
+              - pmd-bin-6.0.1
+      - run:
+          name: Run Static Analysis
+          command: |
+              pmd-bin-6.0.1/bin/run.sh pmd -d . -R apex_ruleset.xml -f text -l apex -r static-analysis.txt
+      - store_artifacts:
+          path: static-analysis.txt
   TestDeployShared:
     executor: my-executor
     steps:
@@ -83,6 +109,7 @@ jobs:
 workflows:
   Tests:
     jobs:
+      - static-analysis
       - TestDeployUAT:
           name: Test Deployment to UAT
           filters:
@@ -101,6 +128,7 @@ workflows:
                 - /^(?i)Hotfix.*/
   Deploys:
     jobs:
+      - static-analysis
       - DeployToUAT:
           name: Deployment to UAT
           filters:
