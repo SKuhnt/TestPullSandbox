@@ -31,13 +31,13 @@ jobs:
       - run:
           name: Run Static Analysis Infos
           command: |
-              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Infos.txt -no-cache -failOnViolation false -D
+              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Infos.txt -no-cache -failOnViolation false
       - store_artifacts:
           path: static-analysis-Infos.txt
       - run:
           name: Run Static Analysis Errors
           command: |
-              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Errors.txt -no-cache -failOnViolation true -D -min 1
+              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Errors.txt -no-cache -failOnViolation true -min 1
       - store_artifacts:
           path: static-analysis-Errors.txt
   TestDeployShared:
