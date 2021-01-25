@@ -7,4 +7,6 @@ public with sharing class Basic {
         Integer value = 1;
         return value;
     }
+
+    
 }
