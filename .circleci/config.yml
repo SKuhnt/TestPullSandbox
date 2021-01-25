@@ -34,7 +34,7 @@ jobs:
               pwd
               ls
               dir
-              pmd-bin-6.30.0/bin/run.sh pmd -d /home/circleci/project -R /apex_ruleset.xml -f text -l apex -r static-analysis.txt -minimumpriority 2
+              pmd-bin-6.30.0/bin/run.sh pmd -d /home/circleci/project -R rulesets/apex_ruleset.xml -f text -l apex -r static-analysis.txt -minimumpriority 2
       - store_artifacts:
           path: static-analysis.txt
   TestDeployShared:
