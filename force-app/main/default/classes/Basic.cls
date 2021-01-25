@@ -15,9 +15,7 @@ public with sharing class Basic {
     */ 
     public static Integer doIt(){
 		// test d
-        for (Integer variable : is) {
-            System.debug('hi');
-        }
+        System.debug('hi');
         return 2;
     }
 } 
