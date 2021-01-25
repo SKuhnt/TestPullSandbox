@@ -8,7 +8,7 @@ executors:
 orbs:
   sfdx: circleci/salesforce-sfdx@2.1
 jobs:
-  static-analysis:
+  static-analysis: 
     docker:
       - image: circleci/openjdk:latest
     steps:
