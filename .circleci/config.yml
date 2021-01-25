@@ -34,8 +34,7 @@ jobs:
               pwd
               ls
               dir
-              alias pmd="$HOME/pmd-bin-6.30.0/bin/run.sh pmd"
-              pmd -R rulesets/apex/quickstart.xml -f text -l apex -r static-analysis.txt
+              pmd-bin-6.30.0/bin/run.sh pmd -d /home/circleci/project -R rulesets/apex/quickstart.xml -f text -l apex -r static-analysis.txt -minimumpriority 2
       - store_artifacts:
           path: static-analysis.txt
   TestDeployShared:
