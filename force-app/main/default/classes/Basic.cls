@@ -13,8 +13,11 @@ public with sharing class Basic {
     * @description 
     * @return 
     */ 
-    public static Integer doIt(){
+    public static Integer doIt(List<Integer> is){
 		// test d
+        for (Integer variable : is) {
+            
+        }
         return 2;
     }
 } 
