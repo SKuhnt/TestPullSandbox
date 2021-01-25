@@ -1,2 +1,0 @@
-C:\Users\Simon\Pictures\bachelor\TestPullSandbox\force-app\main\default\classes\Basic.cls:16:	ApexDoc:	Missing or mismatched ApexDoc @param
-C:\Users\Simon\Pictures\bachelor\TestPullSandbox\force-app\main\default\classes\Basic.cls:18:	EmptyStatementBlock:	Avoid empty block statements.
