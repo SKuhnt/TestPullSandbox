@@ -30,7 +30,7 @@ jobs:
             - pmd-bin-6.30.0
       - restore_cache:
           keys:
-            - pmd_cache
+            - pmd_cache_v1
       - run:
           name: Run Static Analysis Infos
           command: |
@@ -44,7 +44,7 @@ jobs:
       - store_artifacts:
           path: static-analysis-Errors.html
       - save_cache:
-          key: pmd_cache
+          key: pmd_cache_v1
           paths:
             - /cache
   TestDeployShared:
