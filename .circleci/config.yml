@@ -16,6 +16,7 @@ jobs:
       - restore_cache:
           keys:
             - pmd-v6.30.0
+            - pmd_cache
       - run:
           name: Install PMD
           command: |
@@ -31,15 +32,19 @@ jobs:
       - run:
           name: Run Static Analysis Infos
           command: |
-              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Infos.txt -no-cache -failOnViolation false
+              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -f html -r static-analysis-Infos.html -cache cache/infos.cache -failOnViolation false
       - store_artifacts:
-          path: static-analysis-Infos.txt
+          path: static-analysis-Infos.html
       - run:
           name: Run Static Analysis Errors
           command: |
-              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Errors.txt -no-cache -failOnViolation true -min 1
+              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -f html -r static-analysis-Errors.html -no-cache -failOnViolation true -min 1
       - store_artifacts:
-          path: static-analysis-Errors.txt
+          path: static-analysis-Errors.html
+      - save_cache:
+          key: pmd_cache
+          paths:
+            - /cache
   TestDeployShared:
     executor: my-executor
     steps:
