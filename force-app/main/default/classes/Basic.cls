@@ -16,7 +16,7 @@ public with sharing class Basic {
     public static Integer doIt(List<Integer> is){
 		// test d
         for (Integer variable : is) {
-            
+            System.debug('hi');
         }
         return 2;
     }
