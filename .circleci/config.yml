@@ -21,7 +21,7 @@ jobs:
                   unzip pmd-bin-6.30.0.zip
                   rm pmd-bin-6.30.0.zip
               fi
-              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis.txt
+              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis.txt -no-cache
   TestDeployShared:
     executor: my-executor
     steps:
