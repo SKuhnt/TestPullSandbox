@@ -35,6 +35,7 @@ jobs:
               pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Errors.txt  -cache cache-static-analysis -min 1
       - store_artifacts:
           path: static-analysis-Infos.txt
+      - store_artifacts:
           path: static-analysis-Errors.txt
   TestDeployShared:
     executor: my-executor
