@@ -40,7 +40,7 @@ jobs:
       - run:
           name: Run Static Analysis Errors
           command: |
-              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -f html -r static-analysis-Errors.html -no-cache -failOnViolation true -min 1
+              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -f html -r static-analysis-Errors.html -cache cache/error.cache -failOnViolation true -min 1
       - store_artifacts:
           path: static-analysis-Errors.html
       - save_cache:
