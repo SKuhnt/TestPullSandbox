@@ -31,6 +31,7 @@ jobs:
       - run:
           name: Run Static Analysis
           command: |
+              ls
               pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex_ruleset.xml -f text -l apex -r static-analysis.txt -minimumpriority 2
       - store_artifacts:
           path: static-analysis.txt
