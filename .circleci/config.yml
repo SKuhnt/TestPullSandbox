@@ -16,7 +16,6 @@ jobs:
       - restore_cache:
           keys:
             - pmd-v6.30.0
-            - pmd_cache
       - run:
           name: Install PMD
           command: |
@@ -29,6 +28,9 @@ jobs:
           key: pmd-v6.30.0
           paths:
             - pmd-bin-6.30.0
+      - restore_cache:
+          keys:
+            - pmd_cache
       - run:
           name: Run Static Analysis Infos
           command: |
