@@ -21,7 +21,7 @@ jobs:
                   unzip pmd-bin-6.0.1.zip
                   rm pmd-bin-6.0.1.zip
               fi
-              pmd-bin-6.0.1/bin/run.sh pmd -d . -R apex-ruleset -f xml -l apex -r static-analysis.txt -minimumpriority 2
+              pmd-bin-6.0.1/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis.txt
   TestDeployShared:
     executor: my-executor
     steps:
