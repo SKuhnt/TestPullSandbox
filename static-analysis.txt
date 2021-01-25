@@ -1,1 +1,4 @@
 C:\Users\Simon\Pictures\bachelor\TestPullSandbox\force-app\main\default\classes\Basic.cls:1:	ExcessiveClassLength:	Avoid really long classes (lines of code)
+C:\Users\Simon\Pictures\bachelor\TestPullSandbox\force-app\main\default\classes\Basic.cls:1:	ApexDoc:	Missing ApexDoc comment
+C:\Users\Simon\Pictures\bachelor\TestPullSandbox\force-app\main\default\classes\Basic.cls:3:	ApexDoc:	Missing ApexDoc comment
+C:\Users\Simon\Pictures\bachelor\TestPullSandbox\force-app\main\default\classes\Basic.cls:5:	ApexCRUDViolation:	Validate CRUD permission before SOQL/DML operation
