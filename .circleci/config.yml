@@ -13,9 +13,6 @@ jobs:
       - image: circleci/openjdk:latest
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - pmd-v6.0.1
       - run:
           name: Install PMD
           command: |
