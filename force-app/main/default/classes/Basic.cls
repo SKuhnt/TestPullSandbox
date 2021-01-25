@@ -13,7 +13,7 @@ public with sharing class Basic {
     * @description 
     * @return 
     */ 
-    public static Integer doIt(List<Integer> is){
+    public static Integer doIt(){
 		// test d
         for (Integer variable : is) {
             System.debug('hi');
