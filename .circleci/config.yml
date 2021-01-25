@@ -31,7 +31,9 @@ jobs:
       - run:
           name: Run Static Analysis
           command: |
+              pwd
               ls
+              dir
               pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex_ruleset.xml -f text -l apex -r static-analysis.txt -minimumpriority 2
       - store_artifacts:
           path: static-analysis.txt
@@ -129,7 +131,6 @@ workflows:
                 - /^(?i)Hotfix.*/
   Deploys:
     jobs:
-      - static-analysis
       - DeployToUAT:
           name: Deployment to UAT
           filters:
