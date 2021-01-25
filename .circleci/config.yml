@@ -31,12 +31,9 @@ jobs:
       - run:
           name: Run Static Analysis
           command: |
-              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Infos.txt -cache cache-static-analysis -failOnViolation false
-              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Errors.txt  -cache cache-static-analysis -min 1
+              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis.txt  -no-cache -min 1 -showsuppressed
       - store_artifacts:
-          path: static-analysis-Infos.txt
-      - store_artifacts:
-          path: static-analysis-Errors.txt
+          path: static-analysis.txt
   TestDeployShared:
     executor: my-executor
     steps:
