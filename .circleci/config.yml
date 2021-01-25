@@ -13,6 +13,9 @@ jobs:
       - image: circleci/openjdk:latest
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - pmd-v6.30.0
       - run:
           name: Install PMD
           command: |
@@ -21,7 +24,18 @@ jobs:
                   unzip pmd-bin-6.30.0.zip
                   rm pmd-bin-6.30.0.zip
               fi
-              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis.txt -no-cache -min 2
+      - save_cache:
+          key: pmd-v6.30.0
+          paths:
+            - pmd-bin-6.30.0
+      - run:
+          name: Run Static Analysis
+          command: |
+              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Infos.txt -cache cache-static-analysis -failOnViolation false
+              pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -r static-analysis-Errors.txt  -cache cache-static-analysis -min 1
+      - store_artifacts:
+          path: static-analysis-Infos.txt
+          path: static-analysis-Errors.txt
   TestDeployShared:
     executor: my-executor
     steps:
