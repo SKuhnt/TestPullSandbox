@@ -101,7 +101,7 @@ jobs:
       - run:
           name: UAT Coverage
           command: |
-            sfdx force:apex:test:run -c -r human -w 20 -d ./tests/apex
+            sfdx force:apex:test:run -c -r human -w 20 -d ./tests/apex -u uat
       - codecov/upload:
           file: ./tests/apex 
           flags: Apex
