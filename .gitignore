@@ -30,7 +30,7 @@ node_modules/
 
 # MacOS system files
 .DS_Store
-
+.pmdcache
 # Windows system files
 Thumbs.db
 ehthumbs.db
