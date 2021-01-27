@@ -17,5 +17,14 @@ public with sharing class Basic {
 		// test d+  
         System.debug('hi');
         return 2;
+    }  
+    public static Integer doIt2(){
+        Integer i = 0;
+        if(true){
+            i++;
+            return i;
+        } else {
+            return i;
+        }
     } 
 } 
