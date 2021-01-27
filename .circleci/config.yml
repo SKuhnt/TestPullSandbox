@@ -7,6 +7,8 @@ executors:
 
 orbs:
   sfdx: circleci/salesforce-sfdx@2.1
+orbs:
+  codecov: codecov/codecov@1.1.3
 jobs:
   static-analysis: 
     docker:
@@ -88,6 +90,21 @@ jobs:
           name: UAT Deployment
           command: |
             sfdx force:source:deploy -p force-app -u uat -l RunLocalTests -w 33 --loglevel info
+  TestCoverageUAT:
+        executor: my-executor
+    steps:
+      - sfdx/install
+      - checkout
+      - run:
+          name: Auth UAT
+          command: . ~/ci_app/ciScripts/authUAT.sh
+      - run:
+          name: UAT Coverage
+          command: |
+            sfdx force:apex:test:run -c -r human -w 20 -d ./tests/apex
+      - codecov/upload:
+          file: {{ ./tests/apex }}
+          flags: Apex
   TestDeployProd:
     executor: my-executor
     steps:
@@ -116,6 +133,7 @@ workflows:
   Tests:
     jobs:
       - static-analysis
+      - TestCoverageUAT
       - TestDeployUAT:
           name: Test Deployment to UAT
           filters:
