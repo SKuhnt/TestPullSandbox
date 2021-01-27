@@ -17,5 +17,5 @@ public with sharing class Basic {
 		// test d+  
         System.debug('hi');
         return 2;
-    }
+    } 
 } 
