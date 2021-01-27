@@ -91,7 +91,7 @@ jobs:
           command: |
             sfdx force:source:deploy -p force-app -u uat -l RunLocalTests -w 33 --loglevel info
   TestCoverageUAT:
-        executor: my-executor
+    executor: my-executor
     steps:
       - sfdx/install
       - checkout
