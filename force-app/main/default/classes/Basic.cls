@@ -19,6 +19,12 @@ public with sharing class Basic {
         return 2;
     }  
     public static Integer doIt2(){
-        return 2;
+        Integer i = 0;
+        if(true){
+            i++;
+            return i;
+        } else {
+            return i;
+        }
     } 
 } 
