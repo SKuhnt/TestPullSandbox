@@ -6,7 +6,7 @@ public class BasicTest {
         System.assertEquals(2, Basic.doIt());
     }
     @isTest 
-    public static void test(){
+    public static void test1_2(){
         System.assertEquals(2, Basic.doIt2());
     }
     @isTest 
