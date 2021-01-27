@@ -17,5 +17,8 @@ public with sharing class Basic {
 		// test d+  
         System.debug('hi');
         return 2;
+    }  
+    public static Integer doIt2(){
+        return 2;
     } 
 } 
