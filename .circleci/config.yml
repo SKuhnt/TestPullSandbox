@@ -103,7 +103,7 @@ jobs:
           command: |
             sfdx force:apex:test:run -c -r human -w 20 -d ./tests/apex
       - codecov/upload:
-          file: {{ ./tests/apex }}
+          file: ./tests/apex 
           flags: Apex
   TestDeployProd:
     executor: my-executor
