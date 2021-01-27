@@ -77,7 +77,10 @@ jobs:
       - run:
           name: Test UAT Deployment
           command: |
-            sfdx force:source:deploy -p force-app -u uat -l RunLocalTests -w 33 --loglevel info --checkonly
+            sfdx force:source:deploy -p force-app -u uat -l RunLocalTests -w 33 --loglevel info --checkonly --json > test.json
+      - codecov/upload:
+          file: ./test.json
+          flags: Apex
   DeployToUAT:
     executor: my-executor
     steps:
