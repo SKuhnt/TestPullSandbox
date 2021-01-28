@@ -15,7 +15,7 @@ coverage:
     patch: off
   precision: 2
   round: down
-  range: 75...90
+  range: 85...90
     
 
 parsers:
