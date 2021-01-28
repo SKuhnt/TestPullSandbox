@@ -24,7 +24,8 @@ public with sharing class Basic {
             i++;
             return i;
         } else {
-            //return i;
+            i--;
+            return i;
         }
     } 
 } 
