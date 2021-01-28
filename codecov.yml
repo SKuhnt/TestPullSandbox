@@ -7,9 +7,15 @@ coverage:
       default:
         target: 85%
         threshold: 10%
+        base: auto 
+        # advanced
+        branches: 
+          - master
+        if_ci_failed: error
+    patch: off
   precision: 2
   round: down
-  range: 75...100
+  range: 75...90
     
 
 parsers:
