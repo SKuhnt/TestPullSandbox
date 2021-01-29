@@ -20,7 +20,7 @@ describe('c-unit-test', () => {
     const div = element.shadowRoot.querySelector('div');
     expect(div.textContent).toBe('Unit 5 alive!');
   });
-  it('displays unit status with updated unitNumber', () => {
+  /*it('displays unit status with updated unitNumber', () => {
     const element = createElement('c-unit-test', {
      is: UnitTest
     });
@@ -51,5 +51,5 @@ describe('c-unit-test', () => {
     return Promise.resolve().then(() => {
       expect(div.textContent).toBe('Unit 7 alive!');
     });
-  });
+  });*/
 });

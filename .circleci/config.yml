@@ -42,18 +42,17 @@ jobs:
               pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -f html -r static-analysis-Errors.html -no-cache -failOnViolation true -min 2
       - store_artifacts:
           path: static-analysis-Errors.html
-  formatting-and-linting-test-coverage:
+  linting-test-coverage:
     executor: my-executor
     steps:
       - checkout
       - run:
-          # Install npm dependencies for Prettier and Jest
           name: 'is all as expected?'
           command: |
               node --version
               npm --version
       - run:
-          # Install npm dependencies for Prettier and Jest
+          # Install npm dependencies for Jest
           name: 'Install npm dependencies'
           command: |
               npm install
@@ -156,7 +155,7 @@ workflows:
   Tests:
     jobs:
       - static-analysis
-      - formatting-and-linting-test-coverage
+      - linting-test-coverage
       - TestDeployUAT:
           name: Test Deployment to UAT
           filters:
