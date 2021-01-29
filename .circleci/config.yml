@@ -48,6 +48,12 @@ jobs:
       - checkout
       - run:
           # Install npm dependencies for Prettier and Jest
+          name: 'is all as expected?'
+          command: |
+              node --version
+              npm --version
+      - run:
+          # Install npm dependencies for Prettier and Jest
           name: 'Install npm dependencies'
           command: npm ci
       - run:
