@@ -59,14 +59,6 @@ jobs:
               npm install
               npm install @salesforce/sfdx-lwc-jest --save-dev
       - run:
-          # Lint LWC
-          name: 'Lint Lightning Web Components'
-          command: npm run lint:lwc
-      - run:
-          # Lint Aura
-          name: 'Lint Aura components'
-          command: 'npm run lint:aura'
-      - run:
           # LWC unit tests
           name: 'Unit test Lightning Web Components'
           command: npm run test:unit:coverage
