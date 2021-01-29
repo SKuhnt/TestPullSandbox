@@ -55,7 +55,9 @@ jobs:
       - run:
           # Install npm dependencies for Prettier and Jest
           name: 'Install npm dependencies'
-          command: npm ci
+          command: |
+              npm install
+              npm install @salesforce/sfdx-lwc-jest --save-dev
       - run:
           # Prettier formatting
           name: 'Code formatting verification with Prettier'
