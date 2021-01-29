@@ -42,6 +42,48 @@ jobs:
               pmd-bin-6.30.0/bin/run.sh pmd -d . -R apex-ruleset.xml -f html -r static-analysis-Errors.html -no-cache -failOnViolation true -min 2
       - store_artifacts:
           path: static-analysis-Errors.html
+  formatting-and-linting-test-coverage:
+    executor: my-executor
+    steps:
+      - checkout
+      - run:
+          # Install npm dependencies for Prettier and Jest
+          - name: 'Install npm dependencies'
+            command: npm ci
+      - run:
+          # Prettier formatting
+          - name: 'Code formatting verification with Prettier'
+            command: npm run prettier:verify
+      - run:
+          # Lint LWC
+          - name: 'Lint Lightning Web Components'
+            command: npm run lint:lwc
+      - run:
+          # Lint Aura
+          - name: 'Lint Aura components'
+            command: 'npm run lint:aura'
+      - run:
+          # LWC unit tests
+          - name: 'Unit test Lightning Web Components'
+            command: npm run test:unit:coverage
+      - codecov/upload:
+          #file: ./tests/apex/test-result-codecoverage.json
+          flags: LWC
+  TestCoverageUAT:
+    executor: my-executor
+    steps:
+      - sfdx/install
+      - checkout
+      - run:
+          name: Auth UAT
+          command: . ~/ci_app/ciScripts/authUAT.sh
+      - run:
+          name: UAT Coverage
+          command: |
+            sfdx force:apex:test:run -c -r human -w 20 -d ./tests/apex -u uat
+      - codecov/upload:
+          file: ./tests/apex/test-result-codecoverage.json
+          flags: Apex
   TestDeployShared:
     executor: my-executor
     steps:
@@ -90,21 +132,6 @@ jobs:
           name: UAT Deployment
           command: |
             sfdx force:source:deploy -p force-app -u uat -l RunLocalTests -w 33 --loglevel info
-  TestCoverageUAT:
-    executor: my-executor
-    steps:
-      - sfdx/install
-      - checkout
-      - run:
-          name: Auth UAT
-          command: . ~/ci_app/ciScripts/authUAT.sh
-      - run:
-          name: UAT Coverage
-          command: |
-            sfdx force:apex:test:run -c -r human -w 20 -d ./tests/apex -u uat
-      - codecov/upload:
-          file: ./tests/apex/test-result-codecoverage.json
-          flags: Apex
   TestDeployProd:
     executor: my-executor
     steps:
