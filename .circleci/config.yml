@@ -160,6 +160,7 @@ workflows:
   Tests:
     jobs:
       - static-analysis
+      - formatting-and-linting-test-coverage
       - TestDeployUAT:
           name: Test Deployment to UAT
           filters:
