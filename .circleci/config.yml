@@ -48,24 +48,24 @@ jobs:
       - checkout
       - run:
           # Install npm dependencies for Prettier and Jest
-          - name: 'Install npm dependencies'
-            command: npm ci
+          name: 'Install npm dependencies'
+          command: npm ci
       - run:
           # Prettier formatting
-          - name: 'Code formatting verification with Prettier'
-            command: npm run prettier:verify
+          name: 'Code formatting verification with Prettier'
+          command: npm run prettier:verify
       - run:
           # Lint LWC
-          - name: 'Lint Lightning Web Components'
-            command: npm run lint:lwc
+          name: 'Lint Lightning Web Components'
+          command: npm run lint:lwc
       - run:
           # Lint Aura
-          - name: 'Lint Aura components'
-            command: 'npm run lint:aura'
+          name: 'Lint Aura components'
+          command: 'npm run lint:aura'
       - run:
           # LWC unit tests
-          - name: 'Unit test Lightning Web Components'
-            command: npm run test:unit:coverage
+          name: 'Unit test Lightning Web Components'
+          command: npm run test:unit:coverage
       - codecov/upload:
           #file: ./tests/apex/test-result-codecoverage.json
           flags: LWC
