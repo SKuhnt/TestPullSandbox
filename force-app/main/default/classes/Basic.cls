@@ -15,7 +15,6 @@ public with sharing class Basic {
     */ 
     public static Integer doIt(){
 	// Hotix Line 1
-	// test d+  
 	// Hotfix Line 2
         System.debug('hi');
         return 2;
