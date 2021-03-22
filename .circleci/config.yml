@@ -79,6 +79,21 @@ jobs:
       - codecov/upload:
           file: ./tests/apex/test-result-codecoverage.json
           flags: Apex
+  TestCoveragePROD:
+    executor: my-executor
+    steps:
+      - sfdx/install
+      - checkout
+      - run:
+          name: Auth Prod
+          command: . ~/ci_app/ciScripts/authProd.sh
+      - run:
+          name: PROD Coverage
+          command: |
+            sfdx force:apex:test:run -c -r human -w 20 -d ./tests/apex -u prod
+      - codecov/upload:
+          file: ./tests/apex/test-result-codecoverage.json
+          flags: Apex
   TestDeployShared:
     executor: my-executor
     steps:
@@ -161,6 +176,7 @@ workflows:
           filters:
             branches:
               only:
+                - /^(?i)Release.*/
                 - /^(?i)Feature.*/
                 - /^(?i)Hotfix.*/
       - TestDeployProd:
@@ -192,3 +208,7 @@ workflows:
             branches:
               only:
                 - /^(?i)Prod/
+      - TestCoveragePROD:
+          name: Test Coverage PROD
+          requires:
+            - Deployment to Production
