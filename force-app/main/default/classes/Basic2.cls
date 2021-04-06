@@ -18,4 +18,4 @@ public with sharing class Basic2 {
         System.debug('hi');
         return 2;
     } 
-} 
+}
