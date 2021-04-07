@@ -14,7 +14,6 @@ public with sharing class Basic {
     * @return 
     */ 
     public static Integer doIt(){
-        AQU_Util_Crud.insertRecords(new List<Account>());
         System.debug('hi');
         return 2;
     }  
